@@ -4,24 +4,188 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111827;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* ── Floating inventory card animations ── */
+
+@keyframes card-float {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(calc(var(--float-amp, 14px) * -1)) translateX(3px); }
+  50% { transform: translateY(calc(var(--float-amp, 14px) * -0.5)) translateX(-2px); }
+  75% { transform: translateY(calc(var(--float-amp, 14px) * -0.8)) translateX(1px); }
+}
+
+.floating-card {
+  animation: card-float var(--float-duration, 5s) ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Mobile: gentler vertical bob only */
+@keyframes card-float-mobile {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.floating-card-mobile {
+  animation: card-float-mobile 4s ease-in-out infinite;
+}
+
+/* Hide scrollbar for mobile card strip */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Fade-in on load ── */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s ease-out both;
+}
+
+/* ── Gentle bounce for scroll indicator ── */
+
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.animate-gentle-bounce {
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+/* ── Teal banner gradient (hero bottom bar) ── */
+
+.bg-accent-gradient {
+  background: linear-gradient(135deg, #2B6777 0%, #3D8A9C 100%);
+}
+
+/* ── AI scan line animation ── */
+
+@keyframes scanLine {
+  0% { top: -2px; }
+  50% { top: 100%; }
+  100% { top: -2px; }
+}
+
+/* ── Skeleton shimmer ── */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(0 0% 93%) 25%,
+    hsl(0 0% 97%) 37%,
+    hsl(0 0% 93%) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* ── Scroll-reveal: hidden state before intersection observer triggers ── */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children inside a reveal group */
+.scroll-reveal-stagger > .scroll-reveal {
+  transition-delay: calc(var(--stagger-index, 0) * 100ms);
+}
+
+/* ── Toast slide-in ── */
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+}
+
+/* ── AI analyzing spinner ── */
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 1.2s linear infinite;
+}
+
+/* ── Page transition fade ── */
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-enter {
+  animation: page-enter 0.4s ease-out both;
 }

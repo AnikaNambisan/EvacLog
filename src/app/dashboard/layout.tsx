@@ -1,0 +1,9 @@
+import { InventoryProvider } from "@/lib/inventory-store";
+
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <InventoryProvider>{children}</InventoryProvider>;
+}
