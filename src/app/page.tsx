@@ -25,33 +25,68 @@ export default function Home() {
     <>
       {/* ═══════════════════ HERO ═══════════════════ */}
       <Section background="gray" spacing="lg" maxWidth="xl">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-20">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           {/* Left column — copy */}
           <div className="flex-1 max-w-xl text-center lg:text-left">
-            <h1 className="text-3xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight text-neutral-900 leading-[1.1] animate-fade-in-up">
-              EvacLog
+            {/* Category label */}
+            <div className="animate-fade-in-up">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wide uppercase text-accent bg-accent/8 px-3 py-1.5 rounded-full">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                Home Inventory for Emergencies
+              </span>
+            </div>
+
+            <h1 className="mt-5 text-3xl sm:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-neutral-900 leading-[1.08] animate-fade-in-up"
+                style={{ animationDelay: "0.08s" }}>
+              Know what you own.
+              <br />
+              <span className="text-accent">Protect it all.</span>
             </h1>
-            <p className="mt-3 text-lg sm:text-2xl font-semibold text-accent animate-fade-in-up"
-               style={{ animationDelay: "0.1s" }}>
-              Your home&apos;s digital safety net.
+
+            <p className="mt-5 text-base sm:text-lg text-neutral-600 leading-relaxed max-w-md mx-auto lg:mx-0 animate-fade-in-up"
+               style={{ animationDelay: "0.16s" }}>
+              EvacLog auto-builds your home inventory from purchases and photos — so you&apos;re ready for insurance claims and emergencies in seconds, not hours.
             </p>
 
-            <p className="mt-6 text-base sm:text-lg text-neutral-600 leading-relaxed animate-fade-in-up"
-               style={{ animationDelay: "0.2s" }}>
-              Turn everyday purchases into a smart home inventory.
-              <br className="hidden sm:block" />
-              Stay ready for emergencies and insurance claims — all without
-              lifting a finger.
-            </p>
-
+            {/* CTAs */}
             <div className="mt-8 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-3 animate-fade-in-up"
-                 style={{ animationDelay: "0.3s" }}>
+                 style={{ animationDelay: "0.24s" }}>
               <Button href="/dashboard" size="lg">
-                Get Started
+                Start Your Free Inventory
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
               </Button>
               <Button href="#how-it-works" variant="secondary" size="lg">
                 See How It Works
               </Button>
+            </div>
+
+            {/* Trust signals */}
+            <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-xs text-neutral-500 animate-fade-in-up"
+                 style={{ animationDelay: "0.32s" }}>
+              <span className="inline-flex items-center gap-1.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                Bank-level encryption
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                Privacy-first design
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Free to start
+              </span>
             </div>
           </div>
 
@@ -59,10 +94,25 @@ export default function Home() {
           <FloatingCards />
         </div>
 
-        {/* Teal banner */}
-        <div className="mt-16 bg-accent-gradient rounded-xl px-6 py-4 text-white text-center text-sm sm:text-base font-medium animate-fade-in-up"
+        {/* Value prop banner */}
+        <div className="mt-16 bg-accent-gradient rounded-xl px-6 py-5 animate-fade-in-up"
              style={{ animationDelay: "0.5s" }}>
-          protect ur belongings, future purchases - from any disaster
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10 text-white">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl sm:text-3xl font-bold">76+</span>
+              <span className="text-sm opacity-90 leading-tight">Items cataloged<br />automatically</span>
+            </div>
+            <div className="hidden sm:block w-px h-8 bg-white/20" />
+            <div className="flex items-center gap-3">
+              <span className="text-2xl sm:text-3xl font-bold">$53K+</span>
+              <span className="text-sm opacity-90 leading-tight">Average inventory<br />value protected</span>
+            </div>
+            <div className="hidden sm:block w-px h-8 bg-white/20" />
+            <div className="flex items-center gap-3">
+              <span className="text-2xl sm:text-3xl font-bold">30s</span>
+              <span className="text-sm opacity-90 leading-tight">To generate a full<br />insurance report</span>
+            </div>
+          </div>
         </div>
 
         {/* Scroll indicator */}

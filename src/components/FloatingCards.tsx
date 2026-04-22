@@ -179,6 +179,27 @@ export default function FloatingCards() {
         ref={containerRef}
         className="relative w-full h-[480px] hidden lg:block"
       >
+        {/* Summary card — anchors the visual story */}
+        <div className="absolute -top-2 right-6 z-10 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+          <div className="bg-white rounded-xl border border-neutral-200 shadow-lg px-5 py-4 min-w-[240px]">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="text-xs font-medium text-neutral-500">Protected &amp; synced</span>
+            </div>
+            <p className="text-2xl font-bold text-neutral-900 tracking-tight">$53,310</p>
+            <p className="text-xs text-neutral-500 mt-0.5">Total inventory value</p>
+            <div className="mt-3 flex items-center gap-3">
+              <div className="flex-1">
+                <div className="h-1.5 bg-neutral-100 rounded-full overflow-hidden">
+                  <div className="h-full bg-accent rounded-full" style={{ width: "96%" }} />
+                </div>
+              </div>
+              <span className="text-xs font-semibold text-accent">96%</span>
+            </div>
+            <p className="text-[11px] text-neutral-400 mt-1">Items documented for claims</p>
+          </div>
+        </div>
+
         {slots.map((slot, i) => {
           const item = cardItems[i];
           if (!item) return null;
@@ -191,7 +212,7 @@ export default function FloatingCards() {
               key={i}
               className="absolute transition-opacity duration-400"
               style={{
-                top: slot.top,
+                top: slot.top + 90,
                 right: slot.right,
                 transform: `translateY(${pY}px)`,
                 opacity: isCycling && isFadingOut ? 0 : 1,
@@ -213,19 +234,28 @@ export default function FloatingCards() {
         })}
 
         {/* Depth ghost cards */}
-        <div className="absolute top-16 -right-16 opacity-25 blur-[1px]">
+        <div className="absolute top-28 -right-16 opacity-25 blur-[1px]">
           <GhostCard width={220} />
         </div>
-        <div className="absolute top-48 -right-24 opacity-15 blur-[2px]">
+        <div className="absolute top-60 -right-24 opacity-15 blur-[2px]">
           <GhostCard width={200} />
-        </div>
-        <div className="absolute top-[22rem] -right-12 opacity-20 blur-[1px]">
-          <GhostCard width={190} />
         </div>
       </div>
 
       {/* ── Mobile: horizontal scrollable strip ── */}
       <div className="lg:hidden mt-6 sm:mt-10 -mx-3 sm:-mx-6">
+        {/* Mobile summary stat */}
+        <div className="flex items-center justify-center gap-6 mb-4 px-3">
+          <div className="text-center">
+            <p className="text-lg font-bold text-neutral-900">$53,310</p>
+            <p className="text-[11px] text-neutral-500">Protected value</p>
+          </div>
+          <div className="w-px h-8 bg-neutral-200" />
+          <div className="text-center">
+            <p className="text-lg font-bold text-neutral-900">76 items</p>
+            <p className="text-[11px] text-neutral-500">Auto-cataloged</p>
+          </div>
+        </div>
         <div className="flex gap-2 sm:gap-3 px-3 sm:px-6 pb-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
           {cardItems.map((item, i) => (
             <div
